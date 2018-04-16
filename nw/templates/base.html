@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}title{% endblock %} - lecture</title>
+</head>
+<body>
+ 
+{% include 'nav.html' %}
+ 
+{% block content %}
+<div>welcome to nws!</div>
+{% endblock %}<br>
+ 
+{% include 'bottom.html' %}
+ 
+{% include 'tongji.html' %}
+ 
+</body>
+</html>
