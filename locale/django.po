@@ -1,0 +1,7 @@
+#: .\tutorial\models.py:23
+msgid "created at"
+msgstr "创建于"
+ 
+#: .\tutorial\models.py:24
+msgid "updated at"
+msgstr "更新于"

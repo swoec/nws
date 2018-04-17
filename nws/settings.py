@@ -83,6 +83,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'nws.wsgi.application'
 
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -90,9 +97,32 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+    'db1': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'link',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        "HOST": "localhost",
+    },
+    'db2': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'link',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        "HOST": "localhost",
+    },
 }
 
+# use multi-database in django
+# add by WeizhongTu
+DATABASE_ROUTERS = ['nws.database_router.DatabaseAppsRouter']
+DATABASE_APPS_MAPPING = {
+    # example:
+    #'app_name':'database_name',
+    'nw': 'db1',
+    'blog': 'db2',
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -117,6 +147,28 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
+
+MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+)
+
+ 
+LANGUAGES = (
+    ('en', ('English')),
+    ('zh-hans', ('中文简体')),
+    ('zh-hant', ('中文繁體')),
+)
+ 
+#翻译文件所在目录，需要手工创建
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+ 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    
+    "django.core.context_processors.i18n",
+)
 
 LANGUAGE_CODE = 'en-us'
 

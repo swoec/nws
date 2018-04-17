@@ -22,3 +22,11 @@ class Article(models.Model):
  
     def __unicode__(self):# 在Python3中用 __str__ 代替 __unicode__
         return self.title
+    
+    
+class Blogs(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+     
+    def __unicode__(self):
+        return self.title
